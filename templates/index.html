@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NF Events Billing System - Equipment List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> <!-- Font link for heading -->
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Cambria', serif; /* Cambria for all text */
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light background */
+            color: #333;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif; /* Playfair Display for heading */
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+            font-size: 3rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Table Styling */
+        table {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd; /* Lighter border color */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3a5a99; /* Soft Blue header */
+            color: white;
+            font-weight: bold;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        td {
+            background-color: #ffffff; /* White background for table cells */
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9; /* Light gray for even rows */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Hover effect with light gray */
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 15px 30px;
+            background-color: #4C8CFF; /* Blue for the button */
+            color: white;
+            text-decoration: none;
+            border-radius: 50px; /* Rounded corners for a sleek look */
+            display: block;
+            width: 220px;
+            margin: 40px auto;
+            text-align: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #006BFF; /* Darker Blue on hover */
+            transform: scale(1.1);
+        }
+
+        .btn:active {
+            background-color: #005BB5; /* Even darker blue on active */
+        }
+
+        /* Add Fade-In Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Add a Card-like Effect to Form */
+        form {
+            background-color: #fff; /* White background for form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Form Element Styling */
+        input[type="number"], input[type="checkbox"] {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd; /* Lighter border */
+            background-color: #f9f9f9; /* Light gray background */
+            color: #333;
+        }
+
+        input[type="number"]:focus, input[type="checkbox"]:focus {
+            border-color: #3a5a99; /* Blue focus border */
+        }
+    </style>
+</head>
+<body>
+    <h1>NF Events Billing System</h1>
+    
+    {% if equipment %}
+        <form action="/generate_bill" method="POST">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment Name</th>
+                        <th>Description</th>
+                        <th>Rental Price (₹)</th>
+                        <th>Quantity</th>
+                        <th>Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in equipment %}
+                        <tr>
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                            <td><input type="number" name="quantity" min="1" value="1" required></td>
+                            <td><input type="checkbox" name="selected_items" value="{{ item[0] }}"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn">Generate Bill</button>
+        </form>
+    {% else %}
+        <p style="text-align: center; font-size: 1.2rem; color: #ff6f61;">No equipment available at the moment.</p>
+    {% endif %}
+</body>
+</html>

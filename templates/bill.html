@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NF Events Billing System - Generated Bill</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Cambria', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* Heading Styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+            font-size: 3rem;
+            font-weight: 600;
+        }
+
+        /* Sub-heading Styling */
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f9;
+            color: #333;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            text-align: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+
+        .btn:active {
+            background-color: #1d5f7c;
+        }
+
+        /* Add Fade-In Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>NF Events Billing System</h1>
+    <h2>Generated Bill</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Equipment Name</th>
+                <th>Quantity</th>
+                <th>Price (₹)</th>
+                <th>Subtotal (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.subtotal }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Total Cost: ₹{{ total_cost }}</h2>
+
+    <!-- Form to trigger PDF download -->
+    <form action="/download_pdf" method="POST" target="_blank">
+        <input type="hidden" name="total_cost" value="{{ total_cost }}">
+        {% for item in items %}
+            <input type="hidden" name="item_names" value="{{ item.name }}">
+            <input type="hidden" name="item_quantities" value="{{ item.quantity }}">
+            <input type="hidden" name="item_prices" value="{{ item.price }}">
+            <input type="hidden" name="item_subtotals" value="{{ item.subtotal }}">
+        {% endfor %}
+        <button type="submit" class="btn">Download PDF</button>
+    </form>
+
+    <a href="/" class="btn">Back to Equipment List</a>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Bill - NF Events</title>
+    <style>
+        body {
+            font-family: 'Cambria', serif;
+            margin: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #333;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f9;
+            color: #333;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .footer h3 {
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>NF Events</h1>
+        <p>Location: Parambil Kadavu, Calicut, Kerala</p>
+        <p>Contact: 9946550854 | 7012759471</p>
+        <p>Date: {{ current_date }}</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Equipment Name</th>
+                <th>Quantity</th>
+                <th>Rent (₹)</th>
+                <th>Subtotal (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item, quantity, price, subtotal in items %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ quantity }}</td>
+                    <td>{{ price }}</td>
+                    <td>{{ subtotal }}</td>
+                </tr>

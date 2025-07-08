@@ -36,5 +36,5 @@ pip install fpdf
 
 ### 3. Run the application
 ```
-python main.py
+python app.py
 ```

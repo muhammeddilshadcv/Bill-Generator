@@ -14,12 +14,6 @@ A simple and lightweight Python-based bill generator system designed to help sma
 
 ---
 
-## 🖼️ Preview
-
-![App Screenshot](screenshot.png) <!-- Add your own screenshot image here -->
-
----
-
 ## ⚙️ How to Run
 
 ### 1. Clone the repository
